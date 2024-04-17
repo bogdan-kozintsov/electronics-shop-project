@@ -51,9 +51,9 @@ class Item:
             print(f'Длинное слово - {value[:10]}')
 
     @classmethod
-    def instantiate_from_csv(cls, *args):
+    def instantiate_from_csv(cls, filename="../src/items.csv"):
         cls.all.clear()
-        with open("../src/items.csv", newline="") as file:
+        with open(filename, newline="") as file:
             reader = csv.DictReader(file)
             for row in reader:
                 print(row["name"], row["price"], row["quantity"])
