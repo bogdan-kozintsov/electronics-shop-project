@@ -64,4 +64,3 @@ class Item:
 
     def string_to_number(value):
         return int(float(value))
-
