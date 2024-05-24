@@ -55,9 +55,7 @@ def item1():
     return Item("Смартфон", 10000, 20)
 
 def test__repr__(item1):
-    # item1 = Item("Смартфон", 10000, 20)
     assert repr(item1) == "Item('Смартфон', 10000, 20)"
 
 def test__str__(item1):
-    # item1 = Item("Смартфон", 10000, 20)
     assert str(item1) == 'Смартфон'
