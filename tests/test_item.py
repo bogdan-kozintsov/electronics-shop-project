@@ -49,3 +49,16 @@ def test_string_to_number():
     assert Item.string_to_number('5') == 5
     assert Item.string_to_number('5.0') == 5
     assert Item.string_to_number('5.5') == 5
+
+
+@pytest.fixture()
+def item1():
+    return Item("Смартфон", 10000, 20)
+
+
+def test__repr__(item1):
+    assert repr(item1) == "Item('Смартфон', 10000, 20)"
+
+
+def test__str__(item1):
+    assert str(item1) == 'Смартфон'
