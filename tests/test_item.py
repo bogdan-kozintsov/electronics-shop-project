@@ -64,6 +64,7 @@ def test__repr__(item1):
 def test__str__(item1):
     assert str(item1) == 'Смартфон'
 
+
 def test__add__():
     phone1 = Phone("Sony Xperia 1", 70000, 4, 2)
     phone2 = Phone("Sony Xperia 5", 650000, 15, 1)
