@@ -1,6 +1,7 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 import pytest
 from src.item import Item
+from src.phone import Phone
 import os
 import csv
 
@@ -62,3 +63,11 @@ def test__repr__(item1):
 
 def test__str__(item1):
     assert str(item1) == 'Смартфон'
+
+
+def test__add__():
+    phone1 = Phone("Sony Xperia 1", 70000, 4, 2)
+    phone2 = Phone("Sony Xperia 5", 650000, 15, 1)
+    item1 = Item("Смартфон", 10000, 20)
+    assert phone1 + item1 == 24
+    assert phone1 + phone2 == 19
