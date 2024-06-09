@@ -3,15 +3,10 @@ import os
 
 
 class InstantiateCSVError(Exception):
-    """
-    Класс исключения при повреждении файла
-    """
 
     def __init__(self, *args, **kwargs):
-        self.message = args[0] if args else "Файл item.csv поврежден"
-
-    def __str__(self):
-        return self.message
+        self.args = args
+        print(self.args)
 
 
 class Item:
@@ -74,21 +69,23 @@ class Item:
             print(f'Длинное слово - {value[:10]}')
 
     @classmethod
-    def instantiate_from_csv(cls):
-        cls.all.clear()
+    def instantiate_from_csv(cls, file):
         try:
-            with (open("../src/items.csv", "rt", newline="") as csv_file):
-
-                reader = csv.DictReader(csv_file)
-
-                for object in reader:
-                    if "name" not in object or "price" not in object or "quantity" not in object:
-                        raise InstantiateCSVError
-                    cls(object["name"], object["price"], object["quantity"])
+            with open(file) as csvfile:
+                reader = csv.reader(csvfile, delimiter=',')
+                count = 0
+                item_all = []
+                for row in reader:
+                    if count == 0:
+                        count += 1
+                    else:
+                        item_all.append(cls(row[0], row[1], row[2]))
+            cls.all = item_all
         except FileNotFoundError:
-            print("FileNotFoundError: Отсутствует файл item.csv")
-        except InstantiateCSVError:
-            print("InstantiateCSVError: Файл item.csv поврежден")
+            raise FileNotFoundError(f'Отсутствует файл {file}')
+
+        except IndexError:
+            raise InstantiateCSVError(f'Файл {file} поврежден')
 
     @staticmethod
     # возвращаает число из числа-строки
